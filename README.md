@@ -1,12 +1,7 @@
-# Polarity.io  
+# POLARITY.IO  
 
-╔══════════════════════════════════════════════════════════════════════════════╗  
-║                                                                              ║  
-║   NOT FANCY INTRO. BUILT THIS APP BECAUSE MY FATHER WANTS TO COLORIZE        ║  
-║   HIS NEGATIVE IMAGES. PERIOD.                                               ║  
-║                                                                              ║  
-╚══════════════════════════════════════════════════════════════════════════════╝  
+> **NOT A FANCY INTRO.**  
+> Built this app because my father wants to colorize his negative images. Period.  
 
-## What it is  
-Polarity.io is a **negative-to-color photo converter web app**,  
-using **OpenCV** as the main processing core.  
+---
+#### Polarity.io is a **negative-to-color photo converter web app**, powered by **OpenCV** for image processing.
