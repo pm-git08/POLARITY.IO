@@ -1,0 +1,160 @@
+/* --- FUTURISTIC THEME DEFINITIONS --- */
+:root {
+    --bg-color: #0c0a18; 
+    --primary-glow: #4f46e5; 
+    --secondary-glow: #be185d; 
+    --text-primary: #e0e7ff; 
+    --text-secondary: #a5b4fc; 
+    --border-color: rgba(79, 70, 229, 0.4);
+    --sb-track-color: #1e1e3e;
+    --sb-thumb-color: #3b368c;
+    --sb-size: 10px;
+}
+
+/* --- FONT, BODY, & SCROLLBAR STYLING --- */
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    overflow-y: auto; 
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+}
+
+body::-webkit-scrollbar {
+    width: var(--sb-size)
+}
+body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 2px;
+}
+body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 2px;
+    border: 2px solid #3b3779;
+}
+
+h1, h2, h3, button {
+    font-family: 'Orbitron', sans-serif; 
+}
+
+/* --- DYNAMIC BACKGROUND --- */
+#bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(-45deg, #0c0a18, #1e1b4b, #0c0a18, #4c1d95);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+}
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- FUTURISTIC CARD / HUD --- */
+.hud-card {
+    background: rgba(12, 10, 24, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 15px var(--primary-glow), inset 0 0 10px rgba(79, 70, 229, 0.5);
+    animation: fadeIn 1s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- UI ELEMENT STYLING --- */
+.glow-button {
+    background-color: transparent;
+    border: 1px solid var(--primary-glow);
+    color: var(--text-primary);
+    box-shadow: 0 0 5px var(--primary-glow);
+    transition: all 0.3s ease;
+}
+.glow-button:not(:disabled):hover {
+    background-color: var(--primary-glow);
+    box-shadow: 0 0 15px var(--primary-glow), 0 0 25px var(--primary-glow);
+    transform: translateY(-2px);
+}
+.glow-button:disabled {
+    filter: grayscale(80%);
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+#dropzone {
+    border: 2px dashed var(--border-color);
+    transition: all 0.3s ease;
+}
+#dropzone:hover {
+    background: rgba(79, 70, 229, 0.1);
+    border-color: var(--primary-glow);
+}
+
+/* --- NEW RIPPLE LOADER (Centered) --- */
+.loader {
+    width: 48px;
+    height: 48px;
+    position: relative;
+}
+.loader::after,
+.loader::before {
+    content: '';  
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-glow); /* Changed to theme color */
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: animloader 2s linear infinite;
+}
+.loader::after {
+    animation-delay: 1s;
+}
+
+@keyframes animloader {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* --- SLIDER --- */
+#compareSlider, #orangeMaskSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: rgba(79, 70, 229, 0.25);
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+}
+#compareSlider::-webkit-slider-thumb, #orangeMaskSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--text-primary);
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid var(--bg-color);
+    box-shadow: 0 0 10px var(--primary-glow), 0 0 5px var(--secondary-glow);
+    transition: box-shadow 0.2s;
+}
+#compareSlider:hover::-webkit-slider-thumb, #orangeMaskSlider:hover::-webkit-slider-thumb {
+     box-shadow: 0 0 15px var(--primary-glow), 0 0 10px var(--secondary-glow);
+}
+
