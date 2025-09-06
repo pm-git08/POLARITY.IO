@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4f46e5"/>
+    <link rel="manifest" href="manifest.json">
+    <title>POLARITY.IO | Neural Image Inverter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.postimg.cc/fR7ZyX7N/favicon-32x32.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div id="bg-animation"></div>
+
+    <div class="container mx-auto max-w-5xl p-6 md:p-8 rounded-lg text-center hud-card">
+        
+        <header class="mb-6 relative">
+            <h1 class="text-3xl md:text-4xl font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-white to-rose-300">
+                Polarity.IO
+            </h1>
+            <p style="color: var(--text-secondary);" class="mt-2 text-lg">Neural Image Inverter</p>
+            <div id="installBtnContainer" class="hidden absolute top-0 right-0">
+                <button id="installBtn" class="font-bold py-2 px-4 rounded-md shadow-md transition transform glow-button text-sm">
+                    Install App
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <label for="imageUpload" id="dropzone" class="mb-6 p-8 rounded-md border-2 border-dashed cursor-pointer flex flex-col items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 mb-3" style="color: var(--text-secondary);">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l-3.75 3.75M12 9.75l3.75 3.75M3.75 18A5.25 5.25 0 009 20.25h6A5.25 5.25 0 0020.25 15M3.75 12A5.25 5.25 0 019 6.75h6A5.25 5.25 0 0120.25 12" />
+                </svg>
+                <p class="font-bold text-lg">TARGET IMAGE ACQUISITION</p>
+                <p style="color: var(--text-secondary);">Drag & Drop or Click to Select File</p>
+                <input type="file" id="imageUpload" accept="image/*" class="hidden">
+            </label>
+            
+            <div id="status" class="my-4 text-lg" style="color: var(--text-secondary);">Awaiting OpenCV Core Initialization...</div>
+            <button id="convertBtn" class="font-bold py-3 px-8 rounded-md shadow-md transition transform w-full md:w-auto glow-button" disabled>
+                INITIATE INVERSION
+            </button>
+            <div id="loader" class="loader mx-auto my-4 hidden"></div>
+
+            <div class="mt-8 hidden" id="imageContainer">
+                <div class="relative w-full max-w-3xl mx-auto rounded-md overflow-hidden" style="border: 1px solid var(--border-color); box-shadow: 0 0 10px var(--border-color);">
+                    <img id="originalImage" class="block w-full h-auto" alt="Original Image Data">
+                    <canvas id="outputCanvas" class="block w-full h-auto absolute top-0 left-0"></canvas>
+                </div>
+                <div class="mt-6 max-w-3xl mx-auto">
+                    <label for="compareSlider" class="block text-md font-bold tracking-wider mb-2" style="color: var(--text-secondary);">VISUAL ANALYSIS SLIDER</label>
+                    <input type="range" id="compareSlider" min="0" max="100" value="50" class="w-full">
+                </div>
+            </div>
+
+            
+            <div id="correctionContainer" class="mt-8 pt-6 border-t hidden" style="border-color: var(--border-color);">
+                <h3 class="text-xl font-bold tracking-wider mb-6">POST-PROCESSING CALIBRATION</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    
+                    <div class="md:col-span-2">
+                        <div class="flex justify-between items-center mb-1">
+                            <label for="orangeMaskSlider" class="font-bold" style="color: #f97316;">ORANGE MASK REMOVAL</label>
+                            <span id="orangeMaskValue" class="font-mono text-lg" style="color: #f97316;">0</span>
+                        </div>
+                        <input type="range" id="orangeMaskSlider" min="0" max="100" value="0" class="w-full control-slider">
+                    </div>
+                </div>
+                 <button id="resetBtn" class="font-bold mt-6 py-2 px-6 rounded-md transition transform glow-button">RESET CALIBRATION</button>
+            </div>
+
+
+            <div id="saveContainer" class="mt-8 pt-6 border-t hidden" style="border-color: var(--border-color);">
+                <h3 class="text-xl font-bold tracking-wider mb-4">EXPORT PROCESSED DATA</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button id="savePngBtn" class="font-bold py-2 px-6 rounded-md shadow-md transition transform glow-button">.PNG</button>
+                    <button id="saveJpgBtn" class="font-bold py-2 px-6 rounded-md shadow-md transition transform glow-button">.JPG</button>
+                    <button id="saveWebpBtn" class="font-bold py-2 px-6 rounded-md shadow-md transition transform glow-button">.WEBP</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js" defer></script>
+    <script async src="https://docs.opencv.org/4.9.0/opencv.js" onload="onOpenCvReady();"></script>
+</body>
+</html>
+

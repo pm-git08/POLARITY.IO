@@ -1,0 +1,169 @@
+
+:root {
+    --bg-color: #0c0a18; 
+    --primary-glow: #4f46e5; 
+    --secondary-glow: #be185d; 
+    --text-primary: #e0e7ff; 
+    --text-secondary: #a5b4fc; 
+    --border-color: rgba(79, 70, 229, 0.4);
+}
+
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    overflow-y: auto; 
+}
+h1, h2, h3, button {
+    font-family: 'Orbitron', sans-serif; 
+}
+
+
+#bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(-45deg, #0c0a18, #1e1b4b, #0c0a18, #4c1d95);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+}
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+.hud-card {
+    background: rgba(12, 10, 24, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 15px var(--primary-glow), inset 0 0 10px rgba(79, 70, 229, 0.5);
+    animation: fadeIn 1s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+.glow-button {
+    background-color: transparent;
+    border: 1px solid var(--primary-glow);
+    color: var(--text-primary);
+    box-shadow: 0 0 5px var(--primary-glow);
+    transition: all 0.3s ease;
+}
+.glow-button:not(:disabled):hover {
+    background-color: var(--primary-glow);
+    box-shadow: 0 0 15px var(--primary-glow), 0 0 25px var(--primary-glow);
+    transform: translateY(-2px);
+}
+.glow-button:disabled {
+    filter: grayscale(80%);
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+#dropzone {
+    border: 2px dashed var(--border-color);
+    transition: all 0.3s ease;
+}
+#dropzone:hover {
+    background: rgba(79, 70, 229, 0.1);
+    border-color: var(--primary-glow);
+}
+
+/* --- LOADER --- >> */
+/* Loader is a bit buggy. */
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    border: 3px solid;
+    border-color: var(--primary-glow) var(--primary-glow) transparent transparent;
+    box-sizing: border-box;
+    animation: spin 1s linear infinite;
+}
+.loader::after, .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent transparent var(--secondary-glow) var(--secondary-glow);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: spin-back 0.5s linear infinite;
+    transform-origin: center center;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes spin-back { 100% { transform: rotate(-360deg); } }
+
+
+#compareSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #4f46e540;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+}
+#compareSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--text-primary);
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid var(--bg-color);
+    box-shadow: 0 0 10px var(--primary-glow), 0 0 5px var(--secondary-glow);
+    transition: box-shadow 0.2s;
+}
+#compareSlider:hover::-webkit-slider-thumb {
+     box-shadow: 0 0 15px var(--primary-glow), 0 0 10px var(--secondary-glow);
+}
+
+
+body {
+  --sb-track-color: #1e1e3e;
+  --sb-thumb-color: #3b368c;
+  --sb-size: 10px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 2px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 2px;
+  border: 2px solid #3b3779;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
